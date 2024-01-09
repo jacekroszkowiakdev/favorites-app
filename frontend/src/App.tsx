@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { ProductList } from "./components/ProductsList.component";
+import { ProductList } from "./components/ProductList/ProductsList.component";
 import { Product } from "./model/model";
 
 const App: React.FC = () => {
@@ -22,10 +22,10 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <>
+        <div className="app-container">
             <h2>Click the button to see the products</h2>
             <ProductList products={products} />
-        </>
+        </div>
     );
 };
 
