@@ -25,7 +25,7 @@ Before running the server.ts file, make sure you have the following prerequisite
 -   Create a .env file in the backend folder and define the following variable:
 
     ```env
-    PORT=your_desired_port_number
+    VITE_PRODUCTS_BACKEND_SERVER_PORT=your_desired_port_number
     ```
 
 ### Running the Server
