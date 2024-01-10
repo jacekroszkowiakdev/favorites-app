@@ -29,6 +29,11 @@
     flex: 1;
 }
 
+.addToFavorites-button {
+    background-color: red;
+    width: fit-content;
+}
+
 .product-card h2 {
     color: black;
     font-weight: 900;

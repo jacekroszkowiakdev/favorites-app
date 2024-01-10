@@ -16,6 +16,8 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
         ""
     );
     const [filtered, setFiltered] = useState<Product[]>([]);
+    const [favorites, setFavorites] = useState<Product[]>([]);
+    const [renderFavorites, setRenderFavorites] = useState<boolean>(false);
 
     useEffect(() => {
         if (products) {
@@ -41,6 +43,20 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
             setUniqueYears(filteredAndSortedYears);
         }
     }, [products]);
+
+    const addToFavorites = (product: Product) => {
+        const favoriteProducts = [...favorites, product];
+        setFavorites(favoriteProducts);
+        localStorage.setItem("favorites", JSON.stringify(favoriteProducts));
+    };
+
+    const savedFavoriteProducts = localStorage.getItem("favorites");
+    console.log(savedFavoriteProducts);
+
+    const handleShowFavorites = () => {
+        setRenderFavorites(!renderFavorites);
+        console.log(renderFavorites);
+    };
 
     function filterUniqueValues<T>(
         products: Product[],
@@ -86,9 +102,17 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
     return (
         <>
             <h3>The Products:</h3>
-            <div className="sor-and-filter-menu">
+            <div className="products-display-options">
                 {/* conditionally render the sorted  products by clicking button: */}
                 <button onClick={handleSort}>sort products a - z</button>
+
+                {/*conditionally show favorites button: */}
+
+                {savedFavoriteProducts && (
+                    <button onClick={handleShowFavorites}>
+                        show favorites
+                    </button>
+                )}
 
                 {/* conditionally render the filtered products by clicking button: */}
                 <button onClick={() => handleFilter(filterProperty)}>
@@ -146,11 +170,34 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
 
             <div className="products-container">
                 {filtered.map((product) => {
-                    return <ProductDetails product={product} />;
+                    return (
+                        <ProductDetails
+                            product={product}
+                            addToFavorites={addToFavorites}
+                        />
+                    );
                 })}
 
                 {sorted.map((product) => {
-                    return <ProductDetails product={product} />;
+                    return (
+                        <ProductDetails
+                            product={product}
+                            addToFavorites={addToFavorites}
+                        />
+                    );
+                })}
+            </div>
+
+            {/* render the product stored in the favorites */}
+
+            <div className="products-container">
+                {favorites.map((product) => {
+                    return (
+                        <ProductDetails
+                            product={product}
+                            addToFavorites={addToFavorites}
+                        />
+                    );
                 })}
             </div>
 
@@ -159,7 +206,12 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
                 {sorted.length === 0 && filtered.length === 0 && (
                     <div>
                         {products.map((product) => {
-                            return <ProductDetails product={product} />;
+                            return (
+                                <ProductDetails
+                                    product={product}
+                                    addToFavorites={addToFavorites}
+                                />
+                            );
                         })}
                     </div>
                 )}
