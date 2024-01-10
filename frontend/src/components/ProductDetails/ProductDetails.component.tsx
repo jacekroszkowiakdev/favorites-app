@@ -1,8 +1,11 @@
 import React from "react";
 import "./ProductDetails.styles.css";
-import { Product } from "../../model/model";
+import { ProductDetailProps } from "../../model/model";
 
-export const ProductDetails: React.FC<{ product: Product }> = ({ product }) => {
+export const ProductDetails: React.FC<ProductDetailProps> = ({
+    product,
+    addToFavorites,
+}) => {
     return (
         <div className="product-card" key={product.id}>
             <div className="product-image-container">
@@ -20,11 +23,15 @@ export const ProductDetails: React.FC<{ product: Product }> = ({ product }) => {
                 <br />
                 <span>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Incidunt, voluptatum laudantium modi ad provident ut veniam
-                    minima necessitatibus. In non nostrum magni voluptatum
-                    facilis impedit nesciunt, architecto ex dicta minus!
+                    Incidunt, voluptatum laudantium
                 </span>
             </div>
+            <button
+                className="addToFavorites-button"
+                onClick={() => addToFavorites(product)}
+            >
+                favorite
+            </button>
         </div>
     );
 };
