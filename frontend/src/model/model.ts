@@ -1,7 +1,3 @@
-// export interface ProductsData {
-//     products: Product[];
-// }
-
 export interface Product {
     id: number;
     manufacturer: string;
