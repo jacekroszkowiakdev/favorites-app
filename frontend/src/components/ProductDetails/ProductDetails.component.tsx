@@ -20,7 +20,6 @@ export const ProductDetails: React.FC<ProductDetailProps> = ({
                 <p>
                     {product.model} ({product.year})
                 </p>
-                <br />
                 <span>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Incidunt, voluptatum laudantium

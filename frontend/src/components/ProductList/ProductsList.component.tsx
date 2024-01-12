@@ -100,14 +100,13 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
     };
 
     return (
-        <>
+        <div className="products-section">
             <h3>The Products:</h3>
             <div className="products-display-options">
                 {/* conditionally render the sorted  products by clicking button: */}
                 <button onClick={handleSort}>sort products a - z</button>
 
                 {/*conditionally show favorites button: */}
-
                 {savedFavoriteProducts && (
                     <button onClick={handleShowFavorites}>
                         show favorites
@@ -202,20 +201,18 @@ export const ProductList: React.FC<{ products: Product[] }> = ({
             </div>
 
             {/* Render all products form the data base on page load */}
-            <div className="products-container">
-                {sorted.length === 0 && filtered.length === 0 && (
-                    <div>
-                        {products.map((product) => {
-                            return (
-                                <ProductDetails
-                                    product={product}
-                                    addToFavorites={addToFavorites}
-                                />
-                            );
-                        })}
-                    </div>
-                )}
-            </div>
-        </>
+            {sorted.length === 0 && filtered.length === 0 && (
+                <div className="products-container">
+                    {products.map((product) => {
+                        return (
+                            <ProductDetails
+                                product={product}
+                                addToFavorites={addToFavorites}
+                            />
+                        );
+                    })}
+                </div>
+            )}
+        </div>
     );
 };
